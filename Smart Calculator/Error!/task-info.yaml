@@ -1,15 +1,6 @@
 type: edu
 custom_name: stage5
 files:
-- name: src/calculator/Main.kt
-  visible: true
-  text: |
-    package calculator
-
-    fun main() {
-        println("Hello, World!")
-    }
-  learner_created: false
 - name: test/Test.java
   visible: false
   text: |
@@ -214,6 +205,18 @@ files:
         }
     }
   learner_created: false
+- name: src/calculator/Main.kt
+  visible: true
+  text: |
+    package calculator
+
+    fun main() {
+        println("Hello, World!")
+    }
+  learner_created: false
+- name: src/calculator/Calculator.kt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/88/stages/490/implement
 status: Unchecked
 record: -1

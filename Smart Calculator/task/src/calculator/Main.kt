@@ -1,5 +1,77 @@
 package calculator
 
+import kotlin.system.exitProcess
+
+
+fun main() {
+    var uInput: String
+
+
+    do {
+        uInput = readLine().toString()
+
+        if (uInput.isEmpty()) continue
+
+        if (uInput[0] == '/') {
+            when (uInput.drop(1)) {
+                "exit" -> exit()
+                "help" -> help()
+                else -> println("Unknown command")
+            }
+
+        } else {
+            Calculator.start(uInput)
+        }
+
+
+    } while (true)
+}
+
+fun help() {
+    println("The program allows you to perform plus and minus operations of various length")
+}
+
+fun exit() {
+    println("Bye!")
+    exitProcess(-1)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+package calculator
+
 
 import java.lang.Exception
 import kotlin.system.exitProcess
@@ -55,9 +127,11 @@ class Calculator {
                             '-' -> res = '+' + res.drop(2)
                         }
                     }
-                    /*else -> {
+                    */
+/*else -> {
                         throw Exception("Found not +- characters")
-                    }*/
+                    }*//*
+
                 }
 
             }
@@ -131,3 +205,4 @@ fun exit() {
     println("Bye!")
     exitProcess(-1)
 }
+*/

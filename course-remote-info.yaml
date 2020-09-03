@@ -6,20 +6,28 @@ hyperskill_project:
 stages:
 - id: 486
   step: 7809
+  is_completed: false
 - id: 487
   step: 7810
+  is_completed: false
 - id: 488
   step: 7811
+  is_completed: false
 - id: 489
   step: 7812
+  is_completed: false
 - id: 490
   step: 7813
+  is_completed: false
 - id: 491
   step: 7814
+  is_completed: false
 - id: 492
   step: 7815
+  is_completed: false
 - id: 493
   step: 7816
+  is_completed: false
 topics:
   0:
   - title: Units of information
