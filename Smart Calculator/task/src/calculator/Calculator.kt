@@ -31,7 +31,7 @@ class Calculator {
             if (listOfOperations.isNotEmpty()) {
                 while (listOfOperations.size > 0) {
                     val firstOperationPlace = listOfOperations[0]
-                    println(convertedInput)
+                    //println(convertedInput)
                     temporalResult = getSimpleResult(convertedInput[firstOperationPlace],
                             convertedInput[firstOperationPlace - 1].toBigInteger(),
                             convertedInput[firstOperationPlace + 1].toBigInteger())
@@ -40,7 +40,7 @@ class Calculator {
 
 
                     repeat(3) { convertedInput.removeAt(firstOperationPlace) }
-                    println("После шага вычислений и удаления отработанной операции: " + convertedInput)
+                    //println("После шага вычислений и удаления отработанной операции: " + convertedInput)
                     for (i in listOfOperations.indices) {
                         if (listOfOperations[i] > firstOperationPlace) listOfOperations[i] = listOfOperations[i] - 2
                     }
@@ -79,7 +79,7 @@ class Calculator {
                         listOfOperations.add(i)
                     }
                 }
-                println(listOfOperations)
+                        //println(listOfOperations)
                 replaceMinus()
             }
         }
@@ -129,7 +129,7 @@ class Calculator {
             for (i in tempList.indices) {
                 convertedInput[i] = tempList[i]
                 if (i % 2 == 0) {
-                    if (tempList[i].toBigIntegerOrNull() == null) invalidExpressionAlert()
+                    if (tempList[i].toIntOrNull() == null) invalidExpressionAlert()
                 } else {
                     //проверяем символы в нечетных элементах
                     //    println(tempList[i])
