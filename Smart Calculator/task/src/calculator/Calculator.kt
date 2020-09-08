@@ -6,7 +6,7 @@ class Calculator {
     companion object {
         private lateinit var uInput: String
         private var convertedInput = MutableList(0) { "" }
-        private var listOfOperations = mutableMapOf<Int, String>()
+        private var listOfOperations = MutableList(0) { 0 }
         private lateinit var finalResult: BigInteger
         private var isInputError = false
 
@@ -19,29 +19,77 @@ class Calculator {
 
             checkForGeneralErrors()
             if (!isInputError) {
-                tryToCalculate()
+                findOperations()
+                calculate()
                 println(finalResult)
             } else println("Invalid expression")
 
         }
 
-        private fun tryToCalculate() {
+        private fun calculate() {
+            var temporalResult = 0.toBigInteger()
+            if (listOfOperations.isNotEmpty()) {
+                while (listOfOperations.size > 0) {
+                    val firstOperationPlace = listOfOperations[0]
+                    println(convertedInput)
+                    temporalResult = getSimpleResult(convertedInput[firstOperationPlace],
+                            convertedInput[firstOperationPlace - 1].toBigInteger(),
+                            convertedInput[firstOperationPlace + 1].toBigInteger())
+                    listOfOperations.removeAt(0)
+                    convertedInput.add(firstOperationPlace - 1, temporalResult.toString())
+
+
+                    repeat(3) { convertedInput.removeAt(firstOperationPlace) }
+                    println("После шага вычислений и удаления отработанной операции: " + convertedInput)
+                    for (i in listOfOperations.indices) {
+                        if (listOfOperations[i] > firstOperationPlace) listOfOperations[i] = listOfOperations[i] - 2
+                    }
+                }
+            }
+            finalResult = convertedInput[0].toBigInteger()
+        }
+
+        private fun getSimpleResult(str: String, a: BigInteger, b: BigInteger): BigInteger {
+            var res = 0.toBigInteger()
+            when (str) {
+                "*" -> res = a * b
+                "^" -> res = a.pow(b.toInt())
+                "/" -> {
+                    if (b != 0.toBigInteger()) res = a / b else println("Деление на нулл")
+                }
+                "+" -> res = a + b
+                "-" -> res = a - b
+            }
+            return res
+        }
+
+        private fun findOperations() {
 
             // println("первый элемент" + convertedInput[0].toBigInteger())
             // println("размер convertedinput" + convertedInput.size)
             if (convertedInput.size == 1) finalResult = convertedInput[0].toBigInteger() else {
                 //try to find multiplication, dividing and power
-                for (i in 1..convertedInput.lastIndex step 2) {
+                for (i in convertedInput.lastIndex - 1 downTo 1 step 2) {
                     if (convertedInput[i].contains(("[*^/]").toRegex())) {
-                        listOfOperations[i] = convertedInput[i]
+                        listOfOperations.add(i)
                     }
                 }
-                for (i in 1..convertedInput.lastIndex step 2) {
+                for (i in convertedInput.lastIndex - 1 downTo 1 step 2) {
                     if (convertedInput[i].contains(("[-+]").toRegex())) {
-                        listOfOperations[i] = convertedInput[i]
+                        listOfOperations.add(i)
                     }
                 }
                 println(listOfOperations)
+                replaceMinus()
+            }
+        }
+
+        private fun replaceMinus() {
+            for (i in convertedInput.lastIndex - 1 downTo 1 step 2) {
+                if (convertedInput[i] == "-") {
+                    convertedInput[i] = "+"
+                    convertedInput[i + 1] = "-" + convertedInput[i + 1]
+                }
             }
         }
 
